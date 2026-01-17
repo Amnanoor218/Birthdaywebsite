@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Sir!</title>
+<style>
+  /* ===== Global Styles ===== */
+  body, html {
+    margin:0;
+    padding:0;
+    font-family: 'Georgia', serif;
+    background: linear-gradient(to right,#fceabb,#f8b500);
+    color:#fff;
+    overflow-x:hidden;
+    position: relative;
+  }
+  .page {
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    height:100vh;
+    width:100vw;
+    padding:20px;
+  }
+  .active { display:flex; }
+
+  /* ===== Sparkles & Balloons ===== */
+  .sparkle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: sparkleMove 2s linear infinite;
+  }
+  @keyframes sparkleMove {
+    0% {transform: translateY(0) scale(1); opacity:1;}
+    100% {transform: translateY(-200px) scale(0.5); opacity:0;}
+  }
+  .balloon {
+    position: absolute;
+    width: 40px;
+    height: 60px;
+    background: red;
+    border-radius: 50% 50% 50% 50%;
+    animation: floatBalloon linear infinite;
+  }
+  @keyframes floatBalloon {
+    0% {bottom: -60px; transform: translateX(0);}
+    100% {bottom: 100vh; transform: translateX(50px);}
+  }
+
+  /* ===== Landing Page ===== */
+  #page1 h1 {
+    font-size:2.5em;
+    margin-bottom:30px;
+    text-shadow: 2px 2px 6px #aa5500;
+    animation: bounce 1s infinite alternate;
+  }
+  @keyframes bounce {0%{transform:translateY(0);}100%{transform:translateY(-10px);}}
+
+  #startBtn {
+    font-size:2em;
+    padding:25px 50px;
+    cursor:pointer;
+    border:none;
+    border-radius:15px;
+    background:#ff7f50;
+    color:#fff;
+    box-shadow: 0 0 20px rgba(255,127,80,0.7);
+    transition: transform 0.3s, box-shadow 0.3s;
+    font-weight:bold;
+  }
+  #startBtn:hover{
+    transform: scale(1.1);
+    box-shadow: 0 0 40px rgba(255,127,80,1);
+  }
+
+  /* ===== Birthday Page ===== */
+  #page2 h1 {
+    font-size:2.8em;
+    margin-bottom:25px;
+    text-shadow:2px 2px 6px #aa5500;
+  }
+  #page2 button{
+    font-size:2em;
+    padding:20px 50px;
+    cursor:pointer;
+    border:none;
+    border-radius:15px;
+    background:#ff7f50;
+    color:#fff;
+    font-weight:bold;
+    box-shadow: 0 0 20px rgba(255,127,80,0.7);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  #page2 button:hover{
+    transform: scale(1.1);
+    box-shadow: 0 0 40px rgba(255,127,80,1);
+  }
+
+  /* ===== Wishes Page ===== */
+  #wishesPage h2 {
+    font-size:2em;
+    margin-bottom:25px;
+    text-shadow:2px 2px 6px #aa5500;
+  }
+  .wish-box {
+    background: rgba(255,255,255,0.25);
+    padding:25px;
+    border-radius:20px;
+    min-height:150px;
+    width:80%;
+    max-width:700px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-size:1.4em;
+    font-weight:bold;
+    color:#fff;
+    text-shadow: 1px 1px 3px #000;
+    transition: transform 0.3s, background 0.3s;
+    margin-bottom:20px;
+  }
+  .wish-box:hover {
+    transform: scale(1.05);
+    background: rgba(255,255,255,0.4);
+  }
+  .nav-buttons {
+    display:flex;
+    gap:20px;
+    margin-top:20px;
+  }
+  .nav-buttons button {
+    padding:12px 25px;
+    font-size:1em;
+    border-radius:10px;
+    border:none;
+    cursor:pointer;
+    background:#ff7f50;
+    color:#fff;
+    font-weight:bold;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .nav-buttons button:hover{
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255,127,80,0.7);
+  }
+
+  /* ===== Responsive ===== */
+  @media(max-width:600px){
+    #page1 h1{font-size:2em;}
+    #startBtn{font-size:1.5em;padding:20px 35px;}
+    #page2 h1{font-size:2em;}
+    #page2 button{font-size:1.5em;padding:15px 30px;}
+    #wishesPage h2{font-size:1.6em;}
+    .wish-box{font-size:1.1em; min-height:120px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Landing Page ===== -->
+<div id="page1" class="page active">
+  <h1>🎈 Click Here Dear Sir! 🎈</h1>
+  <button id="startBtn">Click if you are ready for surprise</button>
+</div>
+
+<!-- ===== Birthday Page ===== -->
+<div id="page2" class="page">
+  <h1>🎉 HAPPY BIRTHDAY, Dear Sir! 🎉</h1>
+  <button id="toWishesBtn">🎁 Click for another Surprise 🎁</button>
+</div>
+
+<!-- ===== Wishes Page ===== -->
+<div id="wishesPage" class="page">
+  <h2>For your 24th birthday, you deserve 24 wishes!</h2>
+  <div class="wish-box" id="wishBox">Loading...</div>
+  <div class="nav-buttons">
+    <button id="prevWish">⬅️ Previous</button>
+    <button id="nextWish">Next ➡️</button>
+  </div>
+</div>
+
+<!-- ===== JavaScript ===== -->
+<script>
+const page1=document.getElementById('page1');
+const page2=document.getElementById('page2');
+const wishesPage=document.getElementById('wishesPage');
+const startBtn=document.getElementById('startBtn');
+const toWishesBtn=document.getElementById('toWishesBtn');
+const wishBox=document.getElementById('wishBox');
+const prevBtn=document.getElementById('prevWish');
+const nextBtn=document.getElementById('nextWish');
+
+// ===== Landing -> Birthday =====
+startBtn.onclick=()=>{
+  page1.classList.remove('active');
+  page2.classList.add('active');
+  createSparkles();
+  createBalloons();
+}
+
+// ===== Birthday -> Wishes + Music =====
+toWishesBtn.onclick=()=>{
+  page2.classList.remove('active');
+  wishesPage.classList.add('active');
+
+  // ✅ Soft online music dynamically
+  const music = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_0c0a2b6f62.mp3");
+  music.loop = true;
+  music.volume = 0.3;
+  music.play().catch(e => console.log("Music play blocked, click allowed"));
+}
+
+// ===== 24 Wishes =====
+const wishes=[
+  "Happy Birthday, Professor Talha! Your guidance has shaped not just our minds, but our hearts. Thank you for inspiring us every day.",
+  "Wishing you a day filled with the same warmth and wisdom you share with all of us, Sir. Happy Birthday!",
+  "Happy Birthday! Your patience and encouragement make learning a joy — may your day be as wonderful as you are.",
+  "Dear Professor Talha, thank you for believing in us even when we doubted ourselves. Happy Birthday!",
+  "Wishing you endless happiness and success, Sir. Your teaching is a gift that we’ll always treasure.",
+  "Happy Birthday to the mentor who turns challenges into lessons and students into lifelong learners.",
+  "May your birthday bring you as much joy as you bring into your students’ lives, Professor Talha.",
+  "Sir, your guidance is priceless. May your year ahead be full of blessings and achievements. Happy Birthday!",
+  "Happy Birthday, Professor! May your coffee be strong and your grading papers magically disappear today.",
+  "Wishing you a day free of emails, assignments, and students asking “Sir, can you explain again?” Happy Birthday!",
+  "Happy Birthday, Sir! Don’t worry, your lectures are still more interesting than cake… but cake is still good.",
+  "May your birthday be like your syllabus: well-planned, full of surprises, and impossible to skip.",
+  "Happy Birthday, Professor Talha! Age is just a number… but your wisdom is off the charts!",
+  "Sir, may your birthday be so amazing that even your attendance sheet would be jealous.",
+  "Happy Birthday! Here’s to another year of inspiring students and pretending to understand their excuses.",
+  "Happy Birthday, Professor Talha! May this year bring you even more inspiration to change lives.",
+  "Wishing you a year of new achievements and endless opportunities to lead and inspire.",
+  "Happy Birthday! Your passion for teaching motivates us to be better every day.",
+  "May this year be full of discoveries, growth, and moments that remind you why you teach.",
+  "Happy Birthday, Sir! Keep inspiring minds and shaping futures — the world needs more educators like you.",
+  "Here’s to a year where your goals are achieved and your dreams take flight. Happy Birthday!",
+  "Wishing you courage to keep challenging students and creativity to keep guiding us forward.",
+  "Happy Birthday, Professor! May your life continue to be as impactful and meaningful as your lessons.",
+  "thank you for your efferots to click the button  happy birthday one again from your student  Amna ."
+];
+
+let currentWish=0;
+wishBox.textContent=wishes[currentWish];
+
+// ===== Navigation =====
+nextBtn.onclick=()=>{
+  if(currentWish<wishes.length-1){
+    currentWish++;
+    wishBox.textContent=wishes[currentWish];
+  } else {
+    alert("All wishes seen! 🎉");
+  }
+}
+prevBtn.onclick=()=>{
+  if(currentWish>0){
+    currentWish--;
+    wishBox.textContent=wishes[currentWish];
+  }
+}
+
+// ===== Sparkles + Balloons Functions =====
+function createSparkles(){
+  for(let i=0;i<30;i++){
+    const s=document.createElement('div');
+    s.classList.add('sparkle');
+    s.style.left=Math.random()*100+'vw';
+    s.style.bottom=Math.random()*50+'px';
+    s.style.animationDuration= (1+Math.random()*2)+'s';
+    document.body.appendChild(s);
+  }
+}
+function createBalloons(){
+  const colors = ["red","blue","green","pink","orange"];
+  for(let i=0;i<10;i++){
+    const b=document.createElement('div');
+    b.classList.add('balloon');
+    b.style.background=colors[Math.floor(Math.random()*colors.length)];
+    b.style.left=Math.random()*90+'vw';
+    b.style.animationDuration=(5+Math.random()*5)+'s';
+    document.body.appendChild(b);
+  }
+}
+</script>
+
+</body>
+</html>
